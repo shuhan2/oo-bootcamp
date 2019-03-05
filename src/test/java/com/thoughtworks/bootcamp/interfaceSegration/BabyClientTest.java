@@ -16,8 +16,14 @@ class BabyClientTest {
   }
 
   @Test
-  void should_return_Crawl_When_Call_Crawl_Given_BabyClient() {
-    String result = babyClient.Crawl();
-    assertEquals("Crawl", result);
+  void should_return_crawl_when_call_crawl_given_baby_client() {
+    String result = babyClient.crawl();
+    assertEquals("crawl", result);
+  }
+
+  @Test
+  void should_return_eat_when_call_eat_given_baby_client() {
+    String result = babyClient.eat();
+    assertEquals("eat", result);
   }
 }
