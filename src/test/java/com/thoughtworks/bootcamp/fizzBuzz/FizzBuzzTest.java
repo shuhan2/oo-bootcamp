@@ -21,4 +21,9 @@ class FizzBuzzTest {
   void should_return_buzz_when_call_convert_method_given_number_10() {
     assertEquals("Buzz", fizzBuzz.convert(10)) ;
   }
+
+  @Test
+  void should_return_fizz_buzz_when_call_convert_method_given_number_15() {
+    assertEquals("FizzBuzz", fizzBuzz.convert(15)) ;
+  }
 }
