@@ -1,6 +1,6 @@
 package com.thoughtworks.bootcamp.interfaceSegregation;
 
-public class AdultClient implements HumanAble {
+public class AdultClient implements HumanAble, AdultAble {
 
   @Override
   public String eat() {
@@ -17,4 +17,13 @@ public class AdultClient implements HumanAble {
     return "snore";
   }
 
+  @Override
+  public String report() {
+    return "report";
+  }
+
+  @Override
+  public String work() {
+    return "work";
+  }
 }

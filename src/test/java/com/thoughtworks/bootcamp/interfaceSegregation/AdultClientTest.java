@@ -30,4 +30,16 @@ class AdultClientTest {
     String result = adultClient.snore();
     assertEquals("snore", result);
   }
+
+  @Test
+  void should_return_report_when_call_report_given_adult_client() {
+    String result = adultClient.report();
+    assertEquals("report", result);
+  }
+
+  @Test
+  void should_return_work_when_call_work_given_adult_client() {
+    String result = adultClient.work();
+    assertEquals("work", result);
+  }
 }
