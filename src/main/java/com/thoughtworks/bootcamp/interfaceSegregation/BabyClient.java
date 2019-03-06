@@ -11,4 +11,19 @@ public class BabyClient implements HumanAble {
   public String eat() {
     return "eat";
   }
+
+  @Override
+  public String drink() {
+    return "drink";
+  }
+
+  @Override
+  public String cry() {
+    return "cry";
+  }
+
+  @Override
+  public String snore() {
+    return "snore";
+  }
 }

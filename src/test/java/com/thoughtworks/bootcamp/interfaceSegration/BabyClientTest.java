@@ -26,4 +26,22 @@ class BabyClientTest {
     String result = babyClient.eat();
     assertEquals("eat", result);
   }
+
+  @Test
+  void should_return_drink_when_call_drink_given_baby_client() {
+    String result = babyClient.drink();
+    assertEquals("drink", result);
+  }
+
+  @Test
+  void should_return_cry_when_call_cry_given_baby_client() {
+    String result = babyClient.cry();
+    assertEquals("cry", result);
+  }
+
+  @Test
+  void should_return_snore_when_call_snore_given_baby_client() {
+    String result = babyClient.snore();
+    assertEquals("snore", result);
+  }
 }
