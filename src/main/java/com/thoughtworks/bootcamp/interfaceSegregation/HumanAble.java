@@ -2,7 +2,7 @@ package com.thoughtworks.bootcamp.interfaceSegregation;
 
 public interface HumanAble {
 
-  String crawl();
+
 
   String eat();
 
@@ -10,5 +10,5 @@ public interface HumanAble {
 
   String snore();
 
-  String cry();
+
 }

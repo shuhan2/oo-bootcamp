@@ -1,14 +1,12 @@
-package com.thoughtworks.bootcamp.interfaceSegration;
+package com.thoughtworks.bootcamp.interfaceSegregation;
 
-import com.thoughtworks.bootcamp.interfaceSegregation.BabyClient;
-import com.thoughtworks.bootcamp.interfaceSegregation.HumanAble;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BabyClientTest {
-  private HumanAble babyClient;
+  private BabyClient babyClient;
 
   @BeforeEach
   void setUp() {
