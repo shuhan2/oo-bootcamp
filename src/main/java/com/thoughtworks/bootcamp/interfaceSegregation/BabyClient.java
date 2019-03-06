@@ -1,6 +1,6 @@
 package com.thoughtworks.bootcamp.interfaceSegregation;
 
-public class BabyClient implements HumanAble, BabyAble{
+public class BabyClient implements HumanAble, BabyAble {
 
   @Override
   public String crawl() {
