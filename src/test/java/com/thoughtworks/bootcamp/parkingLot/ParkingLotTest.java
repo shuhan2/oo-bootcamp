@@ -21,7 +21,7 @@ class ParkingLotTest {
 
   @Test
   void should_client_get_a_ticket_no_when_call_park_method_given_parking_lot_is_not_full_and_car() {
-    Car car = new Car();
+    Car car = new Car(1);
     Ticket ticket = parkingLot.park(false, car);
     assertNotNull(ticket);
     assertEquals(1, ticket.getNumber());
@@ -29,8 +29,18 @@ class ParkingLotTest {
 
   @Test
   void should_client_get_nothing_when_call_park_method_given_parking_lot_is_full_and_car() {
-    Car car = new Car();
+    Car car = new Car(1);
     Ticket ticket = parkingLot.park(true, car);
     assertNull(ticket);
+  }
+
+  @Test
+  void should_client_get_his_car_when_call_fetch_method_given_valid_ticket() {
+    Car parkingCar =  new Car(1);
+    Ticket ticket = parkingLot.park(false, parkingCar);
+
+    Car fetchCar = parkingLot.fetch(ticket);
+
+    assertEquals(parkingCar, fetchCar);
   }
 }

@@ -1,5 +1,6 @@
 package com.thoughtworks.bootcamp.parkingLot;
 
+
 public class Ticket {
   private int number;
 
