@@ -7,6 +7,9 @@ public class ParkingLot {
   }
 
   public Ticket park(boolean isFull, Car car) {
+    if (isFull) {
+      return null;
+    }
     return new Ticket(1);
   }
 }
