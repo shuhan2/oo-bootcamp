@@ -11,11 +11,6 @@ public class ParkingLot {
     this.size = size;
   }
 
-  public ParkingLot(int size, Map carMap) {
-    this.size = size;
-    this.carMap = carMap;
-  }
-
   public Boolean isFull() {
     return carMap.size() == this.size;
   }
