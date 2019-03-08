@@ -4,10 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
+  private int size;
   private Map<Ticket, Car> carMap = new HashMap<>();
 
+  public ParkingLot(int size) {
+    this.size = size;
+  }
+
+  public ParkingLot(int size, Map carMap) {
+    this.size = size;
+    this.carMap = carMap;
+  }
+
   public Boolean isFull() {
-    return false;
+    return carMap.size() == this.size;
   }
 
   public Ticket park(boolean isFull, Car car) {

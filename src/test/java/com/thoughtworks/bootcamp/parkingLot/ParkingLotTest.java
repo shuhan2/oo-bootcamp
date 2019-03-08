@@ -3,6 +3,9 @@ package com.thoughtworks.bootcamp.parkingLot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParkingLotTest {
@@ -10,7 +13,7 @@ class ParkingLotTest {
 
   @BeforeEach
   void setUp() {
-    parkingLot = new ParkingLot();
+    parkingLot = new ParkingLot(20);
   }
 
   @Test
@@ -21,16 +24,27 @@ class ParkingLotTest {
 
   @Test
   void should_client_get_a_ticket_no_when_call_park_method_given_parking_lot_is_not_full_and_car() {
+    Map<Ticket, Car> carMap = new HashMap<>();
+    parkingLot = new ParkingLot(20, carMap);
+
     Car car = new Car(1);
-    Ticket ticket = parkingLot.park(false, car);
+    Boolean isFull = parkingLot.isFull();
+    Ticket ticket = parkingLot.park(isFull, car);
     assertNotNull(ticket);
     assertEquals(1, ticket.getNumber());
   }
 
   @Test
   void should_client_get_nothing_when_call_park_method_given_parking_lot_is_full_and_car() {
+    Map<Ticket, Car> carMap = new HashMap<>();
+    Car existCar = new Car(111);
+    Ticket existTicket = new Ticket(111);
+    carMap.put(existTicket, existCar);
+    parkingLot = new ParkingLot(1, carMap);
+
     Car car = new Car(1);
-    Ticket ticket = parkingLot.park(true, car);
+    Boolean isFull = parkingLot.isFull();
+    Ticket ticket = parkingLot.park(isFull, car);
     assertNull(ticket);
   }
 
