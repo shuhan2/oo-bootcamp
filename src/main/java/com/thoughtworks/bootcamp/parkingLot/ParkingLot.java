@@ -20,8 +20,8 @@ public class ParkingLot {
     return carMap.size() == this.size;
   }
 
-  public Ticket park(boolean isFull, Car car) {
-    if (isFull) {
+  public Ticket park(Car car) {
+    if (isFull()) {
       return null;
     }
     Ticket ticket = new Ticket(car.getNumber());

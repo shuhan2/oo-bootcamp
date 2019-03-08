@@ -28,8 +28,7 @@ class ParkingLotTest {
     parkingLot = new ParkingLot(20, carMap);
 
     Car car = new Car(1);
-    Boolean isFull = parkingLot.isFull();
-    Ticket ticket = parkingLot.park(isFull, car);
+    Ticket ticket = parkingLot.park(car);
     assertNotNull(ticket);
     assertEquals(1, ticket.getNumber());
   }
@@ -43,15 +42,14 @@ class ParkingLotTest {
     parkingLot = new ParkingLot(1, carMap);
 
     Car car = new Car(1);
-    Boolean isFull = parkingLot.isFull();
-    Ticket ticket = parkingLot.park(isFull, car);
+    Ticket ticket = parkingLot.park(car);
     assertNull(ticket);
   }
 
   @Test
   void should_client_get_his_car_when_call_fetch_method_given_valid_ticket() {
     Car parkingCar =  new Car(1);
-    Ticket ticket = parkingLot.park(false, parkingCar);
+    Ticket ticket = parkingLot.park(parkingCar);
 
     Car fetchCar = parkingLot.fetch(ticket);
 
@@ -64,8 +62,7 @@ class ParkingLotTest {
     parkingLot = new ParkingLot(20, carMap);
 
     Car parkingCar =  new Car(1);
-    Boolean isFull = parkingLot.isFull();
-    parkingLot.park(isFull, parkingCar);
+    parkingLot.park(parkingCar);
     Ticket invalidTicket = new Ticket(2);
     Car fetchCar = parkingLot.fetch(invalidTicket);
 
