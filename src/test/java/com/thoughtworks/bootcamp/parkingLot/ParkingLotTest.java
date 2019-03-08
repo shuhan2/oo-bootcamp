@@ -57,4 +57,18 @@ class ParkingLotTest {
 
     assertEquals(parkingCar, fetchCar);
   }
+
+  @Test
+  void should_client_can_not_get_his_car_when_call_fetch_method_given_invalid_ticket() {
+    Map<Ticket, Car> carMap = new HashMap<>();
+    parkingLot = new ParkingLot(20, carMap);
+
+    Car parkingCar =  new Car(1);
+    Boolean isFull = parkingLot.isFull();
+    parkingLot.park(isFull, parkingCar);
+    Ticket invalidTicket = new Ticket(2);
+    Car fetchCar = parkingLot.fetch(invalidTicket);
+
+    assertNull(fetchCar);
+  }
 }
