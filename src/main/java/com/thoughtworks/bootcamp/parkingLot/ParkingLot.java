@@ -1,7 +1,10 @@
 package com.thoughtworks.bootcamp.parkingLot;
 
+import com.thoughtworks.bootcamp.exceptions.InvalidTicketException;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.springframework.util.ObjectUtils.isEmpty;
 
 public class ParkingLot {
   private int size;
@@ -26,6 +29,9 @@ public class ParkingLot {
 
   public Car fetch(Ticket ticket) {
     Car removedCar = carMap.get(ticket);
+    if (isEmpty(removedCar)) {
+      throw new InvalidTicketException();
+    }
     carMap.remove(ticket);
     return removedCar;
   }

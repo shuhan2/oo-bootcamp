@@ -1,5 +1,6 @@
 package com.thoughtworks.bootcamp.parkingLot;
 
+import com.thoughtworks.bootcamp.exceptions.InvalidTicketException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -51,9 +52,8 @@ class ParkingLotTest {
     parkingLot.park(parkingCar);
     Ticket invalidTicket = new Ticket(2);
 
-    Car fetchCar = parkingLot.fetch(invalidTicket);
+    assertThrows(InvalidTicketException.class, () -> parkingLot.fetch(invalidTicket));
 
-    assertNull(fetchCar);
   }
 
   @Test
