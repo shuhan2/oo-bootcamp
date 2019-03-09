@@ -1,7 +1,11 @@
 package com.thoughtworks.bootcamp.parkingLot;
 
+import com.thoughtworks.bootcamp.exceptions.InvalidTicketException;
 import com.thoughtworks.bootcamp.exceptions.ParkingForbidException;
 import java.util.List;
+import java.util.Optional;
+
+import static org.springframework.util.StringUtils.isEmpty;
 
 public class ParkingBoy {
 
@@ -19,6 +23,16 @@ public class ParkingBoy {
   }
 
   public Car fetch(Ticket ticket) {
-    return parkingLots.stream().map(parkingLot -> parkingLot.fetch(ticket)).findAny().orElseGet(null);
+    return parkingLots.stream()
+        .map(parkingLot -> {
+          try {
+            return parkingLot.fetch(ticket);
+          } catch (InvalidTicketException ignored) {
+          }
+          return null;
+        })
+        .filter(car -> !isEmpty(car))
+        .findAny()
+        .orElseThrow(InvalidTicketException::new);
   }
 }
