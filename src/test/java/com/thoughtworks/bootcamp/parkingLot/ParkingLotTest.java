@@ -55,4 +55,17 @@ class ParkingLotTest {
 
     assertNull(fetchCar);
   }
+
+  @Test
+  void should_client_get_ticket_when_park_given_that_full_parking_not_is_fetched_a_car() {
+    parkingLot = new ParkingLot(1);
+    Car existCar = new Car(111);
+    Ticket existedTicket = parkingLot.park(existCar);
+    parkingLot.fetch(existedTicket);
+    Car car = new Car(1);
+
+    Ticket ticket = parkingLot.park(car);
+
+    assertNotNull(ticket);
+  }
 }
