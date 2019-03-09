@@ -1,6 +1,7 @@
 package com.thoughtworks.bootcamp.parkingLot;
 
 import com.thoughtworks.bootcamp.exceptions.InvalidTicketException;
+import com.thoughtworks.bootcamp.exceptions.ParkingForbidException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +21,7 @@ public class ParkingLot {
 
   public Ticket park(Car car) {
     if (isFull()) {
-      return null;
+      throw new ParkingForbidException();
     }
     Ticket ticket = new Ticket(car.getNumber());
     carMap.put(ticket, car);
