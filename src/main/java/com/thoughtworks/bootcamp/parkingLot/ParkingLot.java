@@ -8,11 +8,16 @@ import java.util.Map;
 import static org.springframework.util.ObjectUtils.isEmpty;
 
 public class ParkingLot {
-  private int size;
-  private Map<Ticket, Car> carMap = new HashMap<>();
 
+  private int size;
+
+  private Map<Ticket, Car> carMap = new HashMap<>();
   public ParkingLot(int size) {
     this.size = size;
+  }
+
+  public int getSize() {
+    return size;
   }
 
   public Boolean isFull() {
