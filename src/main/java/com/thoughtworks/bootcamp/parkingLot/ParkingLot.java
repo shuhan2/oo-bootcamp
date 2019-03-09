@@ -39,6 +39,6 @@ public class ParkingLot {
   }
 
   public Boolean isCarExist(Ticket ticket) {
-    return !isEmpty(carMap.get(ticket));
+    return carMap.containsKey(ticket);
   }
 }

@@ -10,16 +10,19 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParkingBoyTest {
 
+  private ParkingLot parkingLot1;
+  private ParkingLot parkingLot2;
   private List<ParkingLot> parkingLotList;
   private ParkingBoy parkingBoy;
 
   @BeforeEach
   void setUp() {
-    ParkingLot parkingLot1 = new ParkingLot(1);
-    ParkingLot parkingLot2 = new ParkingLot(1);
+    parkingLot1 = new ParkingLot(1);
+    parkingLot2 = new ParkingLot(1);
     parkingLotList = newArrayList(parkingLot1, parkingLot2);
     parkingBoy = new ParkingBoy(parkingLotList);
   }
@@ -31,6 +34,7 @@ class ParkingBoyTest {
     Ticket ticket = parkingBoy.park(car);
 
     assertNotNull(ticket);
+    assertTrue(parkingLot1.isCarExist(ticket) || parkingLot2.isCarExist(ticket));
   }
 
   @Test
