@@ -15,6 +15,9 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
+    compile('com.google.guava:guava:27.0-jre') {
+        force = true
+    }
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.2.0'
     testCompile 'org.mockito:mockito-junit-jupiter:2.19.0'
