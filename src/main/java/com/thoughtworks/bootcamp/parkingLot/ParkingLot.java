@@ -16,10 +16,6 @@ public class ParkingLot {
     this.size = size;
   }
 
-  public int getSize() {
-    return size;
-  }
-
   public Boolean isFull() {
     return carMap.size() == this.size;
   }
