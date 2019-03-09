@@ -37,4 +37,8 @@ public class ParkingLot {
     carMap.remove(ticket);
     return removedCar;
   }
+
+  public Boolean isCarExist(Ticket ticket) {
+    return !isEmpty(carMap.get(ticket));
+  }
 }

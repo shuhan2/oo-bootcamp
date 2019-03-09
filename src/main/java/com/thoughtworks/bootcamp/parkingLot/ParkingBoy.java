@@ -23,16 +23,13 @@ public class ParkingBoy {
   }
 
   public Car fetch(Ticket ticket) {
+    if (isEmpty(ticket)) {
+      throw new InvalidTicketException();
+    }
     return parkingLots.stream()
-        .map(parkingLot -> {
-          try {
-            return parkingLot.fetch(ticket);
-          } catch (InvalidTicketException exception) {
-            return null;
-          }
-        })
-        .filter(car -> !isEmpty(car))
+        .filter(parkingLot -> parkingLot.isCarExist(ticket))
         .findAny()
-        .orElseThrow(InvalidTicketException::new);
+        .orElseThrow(InvalidTicketException::new)
+        .fetch(ticket);
   }
 }
