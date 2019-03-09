@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -23,23 +24,33 @@ class ParkingBoyTest {
   }
 
   @Test
-  void should_return_ticket_when_give_the_car_to_parking_boy_given_a_car_and_parking_lots_are_not_full() {
+  void should_return_ticket_when_park_to_parking_boy_given_a_car_and_parking_lots_are_not_full() {
     Car car = new Car(1);
 
-    Ticket ticket = parkingBoy.receive(car);
+    Ticket ticket = parkingBoy.park(car);
 
     assertNotNull(ticket);
   }
 
   @Test
-  void should_throw_exception_when_give_the_car_to_parking_boy_given_a_car_and_parking_lots_are_full() {
+  void should_throw_exception_when_park_to_parking_boy_given_a_car_and_parking_lots_are_full() {
     Car car1 = new Car(1);
     Car car2 = new Car(2);
 
-    parkingBoy.receive(car1);
-    parkingBoy.receive(car2);
+    parkingBoy.park(car1);
+    parkingBoy.park(car2);
 
     Car parkingCar = new Car(3);
-    assertThrows(ParkingForbidException.class, () -> parkingBoy.receive(parkingCar));
+    assertThrows(ParkingForbidException.class, () -> parkingBoy.park(parkingCar));
+  }
+
+  @Test
+  void should_return_car_when_fetch_given_valid_ticket() {
+    Car parkingCar = new Car(1);
+    Ticket ticket = parkingBoy.park(parkingCar);
+
+    Car fetchedCar = parkingBoy.fetch(ticket);
+
+    assertEquals(parkingCar, fetchedCar);
   }
 }
