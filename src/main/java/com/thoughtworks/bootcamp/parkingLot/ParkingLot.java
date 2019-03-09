@@ -10,10 +10,14 @@ import static org.springframework.util.ObjectUtils.isEmpty;
 public class ParkingLot {
 
   private int size;
-
   private Map<Ticket, Car> carMap = new HashMap<>();
+
   public ParkingLot(int size) {
     this.size = size;
+  }
+
+  public int getAvailableSize() {
+    return this.size - this.carMap.size();
   }
 
   public Boolean isFull() {
