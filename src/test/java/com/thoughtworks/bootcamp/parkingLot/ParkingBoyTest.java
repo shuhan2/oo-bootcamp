@@ -63,4 +63,18 @@ class ParkingBoyTest {
     Ticket ticket = new Ticket(2);
     assertThrows(InvalidTicketException.class, () -> parkingBoy.fetch(ticket));
   }
+
+  @Test
+  void should_return_ticket_when_park_given_that_full_parking_lots_fetch_a_car() {
+    Car car1 = new Car(1);
+    Car car2 = new Car(2);
+    Ticket ticket1 = parkingBoy.park(car1);
+    parkingBoy.park(car2);
+    parkingBoy.fetch(ticket1);
+    Car car = new Car(3);
+
+    Ticket ticket = parkingBoy.park(car);
+
+    assertNotNull(ticket);
+  }
 }
