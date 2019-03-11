@@ -1,9 +1,11 @@
 package com.thoughtworks.bootcamp.parkingLot;
 
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -11,12 +13,15 @@ class SmartParkingBoyTest {
 
   ParkingLot parkingLot1;
   ParkingLot parkingLot2;
+  private List<ParkingLot> parkingLots;
   SmartParkingBoy smartParkingBoy;
 
   @BeforeEach
   void setUp() {
     parkingLot1 = new ParkingLot(1);
     parkingLot2 = new ParkingLot(2);
+    parkingLots =  newArrayList(parkingLot1, parkingLot2);
+    smartParkingBoy = new SmartParkingBoy(parkingLots);
   }
 
   @Test
@@ -40,5 +45,15 @@ class SmartParkingBoyTest {
 
     assertNotNull(ticket);
     assertTrue(parkingLot1.isCarExist(ticket));
+  }
+
+  @Test
+  void should_return_car_when_fetch_given_valid_ticket() {
+    Car parkingCar = new Car(1);
+    Ticket ticket = smartParkingBoy.park(parkingCar);
+
+    Car fetchedCar = smartParkingBoy.fetch(ticket);
+
+    assertEquals(parkingCar, fetchedCar);
   }
 }
