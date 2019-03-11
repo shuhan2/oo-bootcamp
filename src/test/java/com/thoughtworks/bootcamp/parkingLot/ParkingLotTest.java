@@ -1,7 +1,7 @@
 package com.thoughtworks.bootcamp.parkingLot;
 
 import com.thoughtworks.bootcamp.exceptions.InvalidTicketException;
-import com.thoughtworks.bootcamp.exceptions.ParkingForbidException;
+import com.thoughtworks.bootcamp.exceptions.ParkingLotFullException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +32,7 @@ class ParkingLotTest {
     parkingLot.park(existCar);
     Car car = new Car(1);
 
-    assertThrows(ParkingForbidException.class, () -> parkingLot.park(car));
+    assertThrows(ParkingLotFullException.class, () -> parkingLot.park(car));
   }
 
   @Test

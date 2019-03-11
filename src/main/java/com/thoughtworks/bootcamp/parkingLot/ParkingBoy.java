@@ -1,7 +1,9 @@
 package com.thoughtworks.bootcamp.parkingLot;
 
 import com.thoughtworks.bootcamp.exceptions.InvalidTicketException;
+import com.thoughtworks.bootcamp.exceptions.ParkingLotFullException;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.util.StringUtils.isEmpty;
 
@@ -23,4 +25,12 @@ public abstract class ParkingBoy {
         .orElseThrow(InvalidTicketException::new)
         .fetch(ticket);
   }
+
+  public Ticket park(Car car) {
+    return pickParkingLot()
+        .orElseThrow(ParkingLotFullException::new)
+        .park(car);
+  }
+
+  protected abstract Optional<ParkingLot> pickParkingLot();
 }

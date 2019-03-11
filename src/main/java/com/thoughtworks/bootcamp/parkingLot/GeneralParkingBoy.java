@@ -1,7 +1,7 @@
 package com.thoughtworks.bootcamp.parkingLot;
 
-import com.thoughtworks.bootcamp.exceptions.ParkingForbidException;
 import java.util.List;
+import java.util.Optional;
 
 public class GeneralParkingBoy extends ParkingBoy {
 
@@ -12,12 +12,11 @@ public class GeneralParkingBoy extends ParkingBoy {
     this.parkingLots = parkingLots;
   }
 
-  public Ticket park(Car car) {
+  @Override
+  protected Optional<ParkingLot> pickParkingLot() {
     return parkingLots.stream()
         .filter(parkingLot -> !parkingLot.isFull())
-        .findAny()
-        .orElseThrow(ParkingForbidException::new)
-        .park(car);
+        .findAny();
   }
 
 }
