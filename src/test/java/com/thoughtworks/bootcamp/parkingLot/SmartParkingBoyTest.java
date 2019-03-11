@@ -1,7 +1,6 @@
 package com.thoughtworks.bootcamp.parkingLot;
 
 import com.thoughtworks.bootcamp.exceptions.InvalidTicketException;
-import com.thoughtworks.bootcamp.exceptions.ParkingForbidException;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -75,5 +74,19 @@ class SmartParkingBoyTest {
     smartParkingBoy.park(parkingCar);
 
     assertThrows(InvalidTicketException.class, () -> smartParkingBoy.fetch(null));
+  }
+
+  @Test
+  void should_return_ticket_when_park_to_smart_parking_boy_given_a_car_and_full_parking_lots_fetch_a_car() {
+    Car car1 = new Car(1);
+    Car car2 = new Car(2);
+    Ticket ticket1 = smartParkingBoy.park(car1);
+    smartParkingBoy.park(car2);
+    smartParkingBoy.fetch(ticket1);
+    Car car = new Car(3);
+
+    Ticket ticket = smartParkingBoy.park(car);
+
+    assertNotNull(ticket);
   }
 }
