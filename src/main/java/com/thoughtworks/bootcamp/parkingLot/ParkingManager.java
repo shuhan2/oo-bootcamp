@@ -1,5 +1,6 @@
 package com.thoughtworks.bootcamp.parkingLot;
 
+import com.thoughtworks.bootcamp.exceptions.InvalidTicketException;
 import com.thoughtworks.bootcamp.exceptions.ParkingLotFullException;
 import java.util.List;
 
@@ -36,6 +37,13 @@ public class ParkingManager implements Parkable {
 
   @Override
   public Car fetch(Ticket ticket) {
-    return null;
+    if (isEmpty(ticket)) {
+      throw new InvalidTicketException();
+    }
+    return parkingLots.stream()
+        .filter(parkingLot -> parkingLot.isCarExist(ticket))
+        .findAny()
+        .orElseThrow(InvalidTicketException::new)
+        .fetch(ticket);
   }
 }

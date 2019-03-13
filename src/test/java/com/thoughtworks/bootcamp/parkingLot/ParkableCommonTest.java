@@ -84,5 +84,4 @@ public class ParkableCommonTest {
   private static List<Function<List<ParkingLot>, Parkable>> parkingManProvider() {
     return Arrays.asList(GeneralParkingBoy::new, SmartParkingBoy::new, SuperParkingBoy::new, ParkingManager::new);
   }
-
 }
