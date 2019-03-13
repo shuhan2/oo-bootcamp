@@ -10,7 +10,6 @@ public class ParkingManager implements Parkable {
   List<ParkingBoy> parkingBoys;
 
   public ParkingManager(List<ParkingLot> parkingLots) {
-
     this.parkingLots = parkingLots;
   }
 
@@ -21,8 +20,8 @@ public class ParkingManager implements Parkable {
 
   @Override
   public Ticket park(Car car) {
-    if (isEmpty(parkingBoys) || parkingBoys.size() == 0) {
-      return parkingLots.stream()
+    if (isEmpty(parkingBoys) || parkingBoys.stream().noneMatch(ParkingBoy::hasParkingSize)) {
+      return this.parkingLots.stream()
           .filter(parkingLot -> !parkingLot.isFull())
           .findAny()
           .orElseThrow(ParkingLotFullException::new)
@@ -31,7 +30,7 @@ public class ParkingManager implements Parkable {
     return parkingBoys.stream()
         .filter(ParkingBoy::hasParkingSize)
         .findAny()
-        .orElseThrow(ParkingLotFullException::new)
+        .orElseGet(null)
         .park(car);
   }
 

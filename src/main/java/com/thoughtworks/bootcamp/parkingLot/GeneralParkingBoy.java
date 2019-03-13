@@ -5,11 +5,8 @@ import java.util.Optional;
 
 public class GeneralParkingBoy extends ParkingBoy {
 
-  private List<ParkingLot> parkingLots;
-
   public GeneralParkingBoy(List<ParkingLot> parkingLots) {
     super(parkingLots);
-    this.parkingLots = parkingLots;
   }
 
   @Override
