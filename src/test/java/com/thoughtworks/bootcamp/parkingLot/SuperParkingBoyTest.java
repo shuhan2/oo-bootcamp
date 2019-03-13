@@ -22,6 +22,5 @@ class SuperParkingBoyTest {
 
     assertNotNull(ticket);
     assertTrue(parkingLot2.isCarExist(ticket));
-
   }
 }
