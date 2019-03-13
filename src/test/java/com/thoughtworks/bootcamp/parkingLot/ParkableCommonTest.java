@@ -16,8 +16,8 @@ public class ParkableCommonTest {
 
   @ParameterizedTest
   @MethodSource("parkingManProvider")
-  void should_return_ticket_when_park_to_parking_boy_given_parking_lots_are_not_full(Function<List<ParkingLot>, ParkingBoy> parkableCreator) {
-    ParkingBoy parkingMan = parkableCreator.apply(
+  void should_return_ticket_when_park_to_parking_boy_given_parking_lots_are_not_full(Function<List<ParkingLot>, Parkable> parkableCreator) {
+    Parkable parkingMan = parkableCreator.apply(
         Arrays.asList(new ParkingLot(1),
                       new ParkingLot(2)));
 
@@ -82,7 +82,7 @@ public class ParkableCommonTest {
   }
 
   private static List<Function<List<ParkingLot>, Parkable>> parkingManProvider() {
-    return Arrays.asList(GeneralParkingBoy::new, SmartParkingBoy::new, SuperParkingBoy::new);
+    return Arrays.asList(GeneralParkingBoy::new, SmartParkingBoy::new, SuperParkingBoy::new, ParkingManager::new);
   }
 
 }
