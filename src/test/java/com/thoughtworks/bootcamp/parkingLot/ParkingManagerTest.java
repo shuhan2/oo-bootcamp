@@ -35,4 +35,14 @@ class ParkingManagerTest {
     assertThrows(ParkingLotFullException.class, () -> parkingManager.park(new Car(3)));
   }
 
+  @Test
+  void should_return_ticket_when_park_car_given_parking_manager_has_valid_size_and_parking_boy_has_no_valid_size() {
+    ParkingBoy parkingBoy = new GeneralParkingBoy(Arrays.asList(new ParkingLot(1)));
+    Parkable parkingManager = new ParkingManager(newArrayList(new ParkingLot(1)), Arrays.asList(parkingBoy));
+    parkingManager.park(new Car(1));
+
+    Ticket ticket = parkingManager.park(new Car(2));
+
+    assertNotNull(ticket);
+  }
 }
