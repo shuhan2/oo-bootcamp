@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import static org.springframework.util.StringUtils.isEmpty;
 
-public abstract class ParkingBoy {
+public abstract class ParkingBoy implements Parkable {
 
   List<ParkingLot> parkingLots;
 
@@ -32,5 +32,8 @@ public abstract class ParkingBoy {
         .park(car);
   }
 
+  public Boolean hasParkingSize() {
+    return parkingLots.stream().anyMatch(parkingLot -> !parkingLot.isFull());
+  }
   protected abstract Optional<ParkingLot> pickParkingLot();
 }
