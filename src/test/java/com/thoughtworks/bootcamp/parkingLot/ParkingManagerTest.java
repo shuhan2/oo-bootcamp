@@ -69,4 +69,16 @@ class ParkingManagerTest {
 
     assertThrows(InvalidTicketException.class, () -> parkingManager.fetch(new Ticket(2)));
   }
+
+  @Test
+  void should_throw_exception_when_fetch_car_given_ticket_is_used_the_second_time() {
+    ParkingBoy parkingBoy = new GeneralParkingBoy(Arrays.asList(new ParkingLot(1)));
+    Parkable parkingManager = new ParkingManager(newArrayList(new ParkingLot(1)), Arrays.asList(parkingBoy));
+
+    Car car = new Car(1);
+    Ticket ticket = parkingManager.park(car);
+    parkingManager.fetch(ticket);
+
+    assertThrows(InvalidTicketException.class, () -> parkingManager.fetch(ticket));
+  }
 }
