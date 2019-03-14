@@ -1,5 +1,6 @@
 package com.thoughtworks.bootcamp.parkingLot;
 
+import com.thoughtworks.bootcamp.exceptions.InvalidTicketException;
 import com.thoughtworks.bootcamp.exceptions.ParkingLotFullException;
 import java.util.Arrays;
 import java.util.List;
@@ -58,4 +59,14 @@ class ParkingManagerTest {
     assertEquals(car, parkingManager.fetch(ticket));
   }
 
+  @Test
+  void should_throw_exception_when_fetch_car_given_ticket_is_valid() {
+    ParkingBoy parkingBoy = new GeneralParkingBoy(Arrays.asList(new ParkingLot(1)));
+    Parkable parkingManager = new ParkingManager(newArrayList(new ParkingLot(1)), Arrays.asList(parkingBoy));
+
+    Car car = new Car(1);
+    parkingManager.park(car);
+
+    assertThrows(InvalidTicketException.class, () -> parkingManager.fetch(new Ticket(2)));
+  }
 }
