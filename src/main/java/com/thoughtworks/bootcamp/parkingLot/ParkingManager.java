@@ -2,48 +2,52 @@ package com.thoughtworks.bootcamp.parkingLot;
 
 import com.thoughtworks.bootcamp.exceptions.InvalidTicketException;
 import com.thoughtworks.bootcamp.exceptions.ParkingLotFullException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import static org.springframework.util.ObjectUtils.isEmpty;
-
-public class ParkingManager implements Parkable {
-  List<ParkingLot> parkingLots;
+public class ParkingManager extends GeneralParkingBoy implements Parkable {
   List<ParkingBoy> parkingBoys;
-
-  public ParkingManager(List<ParkingLot> parkingLots) {
-    this.parkingLots = parkingLots;
-  }
+  Map<Ticket, Parkable> ticketParkingBoyMap = new HashMap<>();
 
   public ParkingManager(List<ParkingLot> parkingLots, List<ParkingBoy> parkingBoys) {
-    this.parkingLots = parkingLots;
+    super(parkingLots);
     this.parkingBoys = parkingBoys;
   }
 
   @Override
+  public boolean isFull() {
+    return super.isFull() && parkingBoys.stream().allMatch(ParkingBoy::isFull);
+  }
+
+  @Override
   public Ticket park(Car car) {
-    if (isEmpty(parkingBoys) || parkingBoys.stream().noneMatch(ParkingBoy::hasParkingSize)) {
-      return this.parkingLots.stream()
-          .filter(parkingLot -> !parkingLot.isFull())
+    Parkable parkable = this;
+    Ticket ticket;
+    try {
+      ticket = super.park(car);
+    } catch (ParkingLotFullException ex) {
+      parkable = this.parkingBoys.stream()
+          .filter(boy -> !boy.isFull())
           .findAny()
-          .orElseThrow(ParkingLotFullException::new)
-          .park(car);
+          .orElseThrow(ParkingLotFullException::new);
+      ticket = parkable.park(car);
     }
-    return parkingBoys.stream()
-        .filter(ParkingBoy::hasParkingSize)
-        .findAny()
-        .orElseGet(null)
-        .park(car);
+    ticketParkingBoyMap.put(ticket, parkable);
+    return ticket;
   }
 
   @Override
   public Car fetch(Ticket ticket) {
-    if (isEmpty(ticket)) {
+    Parkable parkable = ticketParkingBoyMap.get(ticket);
+    if (parkable == null) {
       throw new InvalidTicketException();
     }
-    return parkingLots.stream()
-        .filter(parkingLot -> parkingLot.isCarExist(ticket))
-        .findAny()
-        .orElseThrow(InvalidTicketException::new)
-        .fetch(ticket);
+    if (parkable == this) {
+      return super.fetch(ticket);
+    }
+    Car car = parkable.fetch(ticket);
+    ticketParkingBoyMap.remove(ticket);
+    return car;
   }
 }

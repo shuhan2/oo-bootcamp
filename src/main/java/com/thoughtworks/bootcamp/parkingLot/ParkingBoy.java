@@ -32,8 +32,9 @@ public abstract class ParkingBoy implements Parkable {
         .park(car);
   }
 
-  public Boolean hasParkingSize() {
-    return parkingLots.stream().anyMatch(parkingLot -> !parkingLot.isFull());
+  public boolean isFull() {
+    return parkingLots.stream().allMatch(ParkingLot::isFull);
   }
+
   protected abstract Optional<ParkingLot> pickParkingLot();
 }

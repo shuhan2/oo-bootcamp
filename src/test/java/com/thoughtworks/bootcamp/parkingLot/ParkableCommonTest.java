@@ -3,6 +3,7 @@ package com.thoughtworks.bootcamp.parkingLot;
 import com.thoughtworks.bootcamp.exceptions.InvalidTicketException;
 import com.thoughtworks.bootcamp.exceptions.ParkingLotFullException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -82,6 +83,9 @@ public class ParkableCommonTest {
   }
 
   private static List<Function<List<ParkingLot>, Parkable>> parkingManProvider() {
-    return Arrays.asList(GeneralParkingBoy::new, SmartParkingBoy::new, SuperParkingBoy::new, ParkingManager::new);
+    return Arrays.asList(GeneralParkingBoy::new,
+                         SmartParkingBoy::new,
+                         SuperParkingBoy::new,
+                         parkingLots -> new ParkingManager(parkingLots, Collections.emptyList()));
   }
 }
